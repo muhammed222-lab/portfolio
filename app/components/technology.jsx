@@ -15,7 +15,7 @@ const Technology = () => {
   };
 
   return (
-    <div className="p-5 mb-6">
+    <div className="p-5 mb-6 w-full lg:w-[70%] mx-auto">
       <h2 className="mb-5 pl-2 border-l-2 border-s-gray-200 text-gray-900">
         Technologies
       </h2>

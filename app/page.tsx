@@ -48,22 +48,22 @@ export default function Home() {
   let workDate = ["2019-2021", "2021-2022", "2022-2022", "2022-2023"];
 
   return (
-    <div className="bg-white -mt-10 pt-[30px] p-4 mobile:p-2 max-w-full">
+    <div className="bg-white min-h-screen flex flex-col justify-center items-center -mt-10 pt-[30px] p-4 mobile:p-2">
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <Navbar />
-      <div className="me_section mt-[6rem] max-w-full mobile:max-w-[80%] mx-auto">
+      <div className="me_section mt-[6rem] max-w-full mobile:max-w-[100%] lg:max-w-[70%] mx-auto text-center lg:text-left">
         <Image
           src={"/favicon.ico"}
           alt="Muhammed"
           width={100}
           height={100}
-          className="mb-4 border w-[70px] rounded-full bg-gray-300"
+          className="mb-4 border w-[70px] rounded-full bg-gray-300 mx-auto lg:mx-0"
         />
-        <h2 className="text-3xl font-bold mt-5 mb-3 laptop:w-[400px] phone:w-[300px]">
+        <h2 className="text-3xl font-bold mt-5 mb-3 mx-auto lg:mx-0 laptop:w-[400px] phone:w-[300px]">
           Software developer, full stack web developer, founder and tech
           adviser.
         </h2>
-        <p className="aboutMeText laptop:w-[500px] tablet:w-[300px] tablet:text-[13px]">
+        <p className="aboutMeText mx-auto lg:mx-0 laptop:w-[500px] tablet:w-[300px] tablet:text-[13px]">
           I'm Muhammed Olayemi, a full stack website developer, software
           developer and entrepreneur based in Lagos Nigeria.
           <br />
@@ -81,7 +81,7 @@ export default function Home() {
       <Experience />
       <Testimonial />
 
-      <div className="flex flex-col phone:flex-row justify-around mt-10">
+      <div className="flex flex-col phone:flex-row justify-around mt-10 w-full lg:w-[70%] mx-auto">
         <div className="article_container w-full">
           <Article title={titles} date={dates} articles={articles} />
         </div>

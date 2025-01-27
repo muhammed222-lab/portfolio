@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Experience = () => {
   return (
-    <div className="p-5">
+    <div className="p-5 w-full lg:w-[70%] mx-auto">
       <h2 className="mb-5 pl-2 border-l-2 border-s-gray-200 text-gray-900">
         Experience
       </h2>
