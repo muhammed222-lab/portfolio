@@ -2,46 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-    --foreground-rgb: 0, 0, 0;
-    --background-start-rgb: 214, 219, 220;
-    --background-end-rgb: 255, 255, 255;
+/* Core styles */
+
+/* Navigation styles */
+.navLinks_links {
+  @apply flex items-center gap-4;
 }
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --foreground-rgb: 255, 255, 255;
-        --background-start-rgb: 0, 0, 0;
-        --background-end-rgb: 0, 0, 0;
-    }
+.navLinks_links a {
+  @apply text-base font-medium transition-colors duration-300;
 }
 
-body {
-    background-color: white;
-    width: 90% !important;
-    margin: 0 auto;
-    height: 100vh;
-}
-
-@media (min-width: 600px) {
-    body {
-        background-color: white;
-        width: 100% !important;
-        margin: 0 auto;
-        height: 100vh;
-    }
-}
-
+/* Utility classes */
 @layer utilities {
-    .text-balance {
-        text-wrap: balance;
-    }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.navLinks_links link {
-    font-size: 17px;
-}
-
-.navLinks_links .the_link:hover {
-    color: #4070f4;
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }

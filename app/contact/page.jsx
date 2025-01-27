@@ -5,7 +5,7 @@ import Image from "next/image";
 import Footer from "../components/footer";
 import emailjs from "emailjs-com";
 
-const page = () => {
+const Page = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -72,42 +72,43 @@ const page = () => {
   };
 
   return (
-    <div className="bg-white -mt-15 pt-[30px] p-7">
+    <div className="bg-white -mt-15 pt-[30px] p-4 sm:p-7">
       <div className="contact">
-        <div className="me_section mt-[6rem] p-8">
-          <div>
+        <div className="me_section mt-[6rem] p-4 sm:p-8">
+          <div className="flex flex-col items-center lg:items-start">
             <Image
               src={"/favicon.ico"}
               alt="Muhammed"
-              width={"100"}
-              height={"100"}
-              className="mb-18 border w-[70px] rounded-full bg-gray-300 sticky"
+              width={100}
+              height={100}
+              className="mb-6 border w-[70px] rounded-full bg-gray-300"
             />
-            <h2 className="text-3xl font-bold mt-[20px] mb-[10px] w-[500px]">
+            <h2 className="text-2xl sm:text-3xl font-bold mt-4 mb-2 text-center lg:text-left w-full lg:w-[500px]">
               Contact me for your new project, team, hire, or freelancing
               service. Send a message to me.
             </h2>
-            <p className="w-[600px] mt-5 text-sm">
+            <p className="mt-5 text-sm text-center lg:text-left w-full lg:w-[600px]">
               I'm available for instant hiring opportunities.
             </p>
           </div>
         </div>
-        <div className="flex justify-between w-[90%]">
-          <div>
+        <div className="flex flex-col lg:flex-row justify-between w-full lg:w-[90%] mx-auto">
+          <div className="w-full lg:w-[45%]">
             <div className="social_media">{/* Social Media Links */}</div>
             <hr className="mt-5" />
             <div className="phone mt-4 mb-4">
               {/* Phone and contact details */}
             </div>
           </div>
-          <div className="form mb-5">
+          <div className="form mb-5 w-full lg:w-[45%]">
             <h1 className="text-[15px] text-gray-700 mb-4 font-bold">
               Contact Me
             </h1>
             <form
               action="#"
               onSubmit={handleSubmit}
-              className="flex flex-col p-4 bg-gray-100 rounded-lg w-[400px] border border-gray-300">
+              className="flex flex-col p-4 bg-gray-100 rounded-lg w-full border border-gray-300"
+            >
               <div>
                 <label htmlFor="name" className="text-[13px] text-gray-500">
                   Name
@@ -119,7 +120,7 @@ const page = () => {
                   name="name"
                   required
                   onChange={handleChange}
-                  className="w-[100%] h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
+                  className="w-full h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
                 />
               </div>
               <div>
@@ -133,7 +134,7 @@ const page = () => {
                   name="email"
                   required
                   onChange={handleChange}
-                  className="w-[100%] h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
+                  className="w-full h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
                 />
               </div>
               <div>
@@ -145,7 +146,8 @@ const page = () => {
                   id="Message"
                   required
                   onChange={handleChange}
-                  className="w-[100%] h-[200px] pt-2 resize-none pl-4 mb-4 text-[12px] outline-none rounded-md"></textarea>
+                  className="w-full h-[200px] pt-2 resize-none pl-4 mb-4 text-[12px] outline-none rounded-md"
+                ></textarea>
               </div>
               <div>
                 <input
@@ -156,7 +158,8 @@ const page = () => {
                 />
                 <label
                   className="text-[13px] text-gray-500 pl-2"
-                  htmlFor="urgent">
+                  htmlFor="urgent"
+                >
                   Mark as urgent
                 </label>
               </div>
@@ -173,4 +176,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

@@ -35,33 +35,33 @@ const Subscribe = () => {
   };
 
   return (
-    <div>
-      <div className="subscribe_box w-[300px] p-5 shadow-sm mt-10 tablet:ml-0 laptop:ml-10 rounded-md border-2 border-solid border-gray-200 align-middle">
-        <div className="title flex align-center gap-2 items-center">
+    <div className="flex justify-center">
+      <div className="subscribe_box w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl p-5 shadow-sm mt-10 rounded-md border-2 border-solid border-gray-200">
+        <div className="title flex items-center gap-2">
           <Image
             src={"/email.png"}
             width={30}
             height={25}
-            className="opacity-[.7]"
+            className="opacity-70"
             alt="email"
           />
           <span className="text-[12px]">Stay up to date</span>
         </div>
-        <p className="text-[11px] text-[gray] mb-4 mt-4">
+        <p className="text-[11px] text-gray-500 mb-4 mt-4">
           Get notified when I publish something new. And unsubscribe at any
           time.
         </p>
         <form onSubmit={handleSubmit}>
-          <div className="input_section flex w-[300px]">
+          <div className="input_section flex w-full">
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="email@gmail.com"
-              className="w-[160px] text-[10px] p-2 border-2 border-r-0 border-solid border-gray-400 outline-none rounded-s-md"
+              className="flex-grow text-[10px] p-2 border-2 border-r-0 border-solid border-gray-400 outline-none rounded-l-md"
               required
             />
-            <button className="bg-black text-[white] text-[12px] p-2 rounded-e-md">
+            <button className="bg-black text-white text-[12px] p-2 rounded-r-md">
               Get updates
             </button>
           </div>

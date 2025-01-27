@@ -1,82 +1,126 @@
 "use client";
-
-import { usePathname } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Menu, X, Heart } from "lucide-react";
 import Link from "next/link";
-import Image from "next/image";
 
 const NavBar = () => {
-  const pathname = usePathname();
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
-  const applyTheme = () => {
-    if (isDarkMode) {
-      document.body.style.background = "black";
-      document.body.style.color = "#fff";
-    } else {
-      document.body.style.background = "";
-      document.body.style.color = "";
-    }
-  };
+  // Replace with actual usePathname() in Next.js
+  const pathname = "/";
+
+  const navigationItems = [
+    { name: "About", path: "/about" },
+    { name: "Article", path: "/article" },
+    { name: "Projects", path: "/projects" },
+    { name: "Speaking", path: "/speaking" },
+    { name: "Uses", path: "/uses" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   useEffect(() => {
-    // Apply theme on load and whenever isDarkMode changes
-    applyTheme();
-  }, [isDarkMode]);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
 
-  const toggleTheme = () => {
-    setIsDarkMode((prev) => !prev);
-  };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div>
-      <div className="flex justify-center bg-center z-[100] fixed top-0 left-[50%] transform -translate-x-1/2">
-        <div className="fixed m-auto">
-          <div className="the_nav_links border-gray-300 z-10 mt-7 shadow-60 border shadow-md bg-gray-10 flex justify-center align-center laptop:w-[410px] phone:w-[300px] rounded-full backdrop-blur p-1">
-            <nav className="p-2 flex justify-center items-center text-[13px]">
-              <Link href={"/"}>
-                <Image
-                  src={"/favicon.ico"}
-                  width={30}
-                  height={30}
-                  alt="Home"
-                  className={`cursor-pointer rounded-full p-1 ${
-                    pathname === "/"
-                      ? "bg-slate-600 border-2 border-[#009688]"
-                      : "bg-slate-600 -ml-1"
-                  }`}
-                />
-              </Link>
-              {[
-                "about",
-                "article",
-                "projects",
-                "speaking",
-                "uses",
-                "contact",
-              ].map((item) => (
-                <Link
-                  key={item}
-                  href={`/${item}`}
-                  title={item.charAt(0).toUpperCase() + item.slice(1)}
-                  className={`ml-4 text-[13px] ${
-                    pathname === `/${item}` ? "text-[#009688] font-bold" : ""
-                  }`}>
-                  {item.charAt(0).toUpperCase() + item.slice(1)}
-                </Link>
-              ))}
-            </nav>
+    <div
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+        isScrolled ? "bg-white/90 backdrop-blur-md shadow-lg" : "bg-white/50"
+      }`}
+    >
+      <div className="max-w-full mx-auto px-4">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <Link href="/" className="flex items-center space-x-2">
+            <img
+              src="/favicon.ico"
+              alt="Logo"
+              className={`w-8 h-8 rounded-full transition-all duration-300 ${
+                pathname === "/" ? "ring-2 ring-[#009688] p-1" : ""
+              }`}
+            />
+            <span className="font-semibold text-gray-800">
+              Muhammed Olayemi
+            </span>
+          </Link>
 
-            <div className="absolute bg-white p-2 shadow-60 border shadow-md bg-gray-10 align-center flex w-[100px] justify-between rounded-full -right-15 -right-60">
-              <Image
-                src={isDarkMode ? "/moon.png" : "/ios7-sunny-outline.png"}
-                width={30}
-                height={40}
-                className="cursor-pointer opacity-50 hover:opacity-100 transition rounded-full"
-                onClick={toggleTheme}
-                alt={isDarkMode ? "Dark Mode" : "Light Mode"}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-6">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                className={`text-sm font-medium transition-colors duration-300 hover:text-[#009688] ${
+                  pathname === item.path
+                    ? "text-[#009688] font-bold"
+                    : "text-gray-700"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right side controls */}
+          <div className="flex items-center space-x-4">
+            {/* Like Button */}
+            <button
+              onClick={() => setIsLiked(!isLiked)}
+              className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-300"
+              aria-label="Like"
+            >
+              <Heart
+                className={`w-5 h-5 transition-colors duration-300 ${
+                  isLiked ? "fill-red-500 text-red-500" : "text-gray-600"
+                }`}
               />
-            </div>
+            </button>
+
+            {/* Mobile menu button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors duration-300"
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? (
+                <X className="w-6 h-6 text-gray-600" />
+              ) : (
+                <Menu className="w-6 h-6 text-gray-600" />
+              )}
+            </button>
+          </div>
+        </div>
+
+        {/* Mobile Navigation */}
+        <div
+          className={`md:hidden transition-all duration-300 ease-in-out ${
+            isMenuOpen
+              ? "max-h-screen opacity-100 visible"
+              : "max-h-0 opacity-0 invisible"
+          }`}
+        >
+          <div className="px-2 pt-2 pb-3 space-y-1 bg-white rounded-lg shadow-lg mt-2">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.name}
+                href={item.path}
+                onClick={() => setIsMenuOpen(false)}
+                className={`block px-4 py-3 rounded-md text-base font-medium transition-colors duration-300 ${
+                  pathname === item.path
+                    ? "text-[#009688] bg-gray-50"
+                    : "text-gray-700 hover:bg-gray-50 hover:text-[#009688]"
+                }`}
+              >
+                {item.name}
+              </Link>
+            ))}
           </div>
         </div>
       </div>
