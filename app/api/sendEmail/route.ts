@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       from: `"${process.env.SMTP_NAME}" <${process.env.SMTP_USER}>`,
       to: email,
       subject: "Thank You for Contacting Me!",
-      text: `Hi ${name},\n\nThank you for reaching out! I have received your message and will get back to you soon.\n\nBest Regards,\nYour Name`,
+      text: `Hi ${name},\n\nThank you for reaching out! I have received your message and will get back to you soon.\n\nBest Regards,\n Muhammed Olayemi`,
       html: `
         <h3>Thank You, ${name}!</h3>
         <p>We have received your message and will respond shortly.</p>
