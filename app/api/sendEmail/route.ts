@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
         <p><strong>Your Message:</strong></p>
         <blockquote>${message}</blockquote>
         <p>Best Regards,</p>
-        <p>Your Name</p>
+        <p>Muhammed Olayemi.</p>
       `,
     });
 
