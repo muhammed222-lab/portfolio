@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import Footer from "../components/footer";
-import emailjs from "emailjs-com";
 
 const Page = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +11,9 @@ const Page = () => {
     urgent: false,
   });
 
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     setFormData({
@@ -21,58 +22,37 @@ const Page = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setStatus(null);
 
-    const templateParams = {
-      name: formData.name,
-      email: formData.email,
-      message: formData.message,
-      urgent: formData.urgent ? "Yes" : "No",
-    };
-
-    // Send email to yourself
-    emailjs
-      .send(
-        "service_k3pv4za", // Your service ID
-        "template_1b25bm9", // Your template ID for your email
-        templateParams,
-        "oU8gvUbQB1fyopx-F" // Your user ID
-      )
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-
-        // Send confirmation email to user
-        emailjs
-          .send(
-            "service_k3pv4za", // Use the same or different service ID
-            "template_xff8jll", // Your confirmation email template ID
-            { name: formData.name, email: formData.email },
-            "oU8gvUbQB1fyopx-F"
-          )
-          .then(() => {
-            alert(
-              "Message sent successfully! You will receive a confirmation email."
-            );
-          })
-          .catch((err) => {
-            console.error("Confirmation email failed...", err);
-            alert(
-              "Message sent, but failed to send confirmation email. Please check your email."
-            );
-          });
-      })
-      .catch((err) => {
-        console.error("FAILED...", err);
-        alert("Failed to send message. Please try again later.");
+    try {
+      const response = await fetch("/api/sendEmail", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
 
-    // Reset form
-    setFormData({ name: "", email: "", message: "", urgent: false });
+      const result = await response.json();
+
+      if (response.ok) {
+        setStatus({ type: "success", message: result.message });
+        setFormData({ name: "", email: "", message: "", urgent: false });
+      } else {
+        setStatus({ type: "error", message: result.error });
+      }
+    } catch (error) {
+      setStatus({ type: "error", message: "Something went wrong. Try again!" });
+    }
+
+    setLoading(false);
   };
 
   return (
-    <div className="bg-white -mt-15 pt-[30px] p-4 sm:p-7">
+    <div className="bg-white pt-[30px] p-4 sm:p-7">
       <div className="contact">
         <div className="me_section mt-[6rem] p-4 sm:p-8">
           <div className="flex flex-col items-center lg:items-start">
@@ -83,29 +63,22 @@ const Page = () => {
               height={100}
               className="mb-6 border w-[70px] rounded-full bg-gray-300"
             />
-            <h2 className="text-2xl sm:text-3xl font-bold mt-4 mb-2 text-center lg:text-left w-full lg:w-[500px]">
-              Contact me for your new project, team, hire, or freelancing
-              service. Send a message to me.
+            <h2 className="text-2xl sm:text-3xl font-bold mt-4 mb-2 text-center lg:text-left">
+              Contact me for new projects or freelancing.
             </h2>
-            <p className="mt-5 text-sm text-center lg:text-left w-full lg:w-[600px]">
+            <p className="mt-5 text-sm text-center lg:text-left">
               I'm available for instant hiring opportunities.
             </p>
           </div>
         </div>
+
         <div className="flex flex-col lg:flex-row justify-between w-full lg:w-[90%] mx-auto">
-          <div className="w-full lg:w-[45%]">
-            <div className="social_media">{/* Social Media Links */}</div>
-            <hr className="mt-5" />
-            <div className="phone mt-4 mb-4">
-              {/* Phone and contact details */}
-            </div>
-          </div>
+          <div className="w-full lg:w-[45%]"></div>
           <div className="form mb-5 w-full lg:w-[45%]">
             <h1 className="text-[15px] text-gray-700 mb-4 font-bold">
               Contact Me
             </h1>
             <form
-              action="#"
               onSubmit={handleSubmit}
               className="flex flex-col p-4 bg-gray-100 rounded-lg w-full border border-gray-300"
             >
@@ -115,36 +88,37 @@ const Page = () => {
                 </label>
                 <input
                   type="text"
-                  placeholder="my name"
                   id="name"
                   name="name"
                   required
+                  value={formData.name}
                   onChange={handleChange}
                   className="w-full h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
                 />
               </div>
               <div>
-                <label className="text-[13px] text-gray-500" htmlFor="email">
+                <label htmlFor="email" className="text-[13px] text-gray-500">
                   Email
                 </label>
                 <input
                   type="email"
-                  placeholder="myemail@gmail.com"
                   id="email"
                   name="email"
                   required
+                  value={formData.email}
                   onChange={handleChange}
                   className="w-full h-8 pl-4 mb-4 text-[12px] outline-none rounded-md"
                 />
               </div>
               <div>
-                <label className="text-[13px] text-gray-500" htmlFor="Message">
+                <label htmlFor="Message" className="text-[13px] text-gray-500">
                   Message
                 </label>
                 <textarea
-                  name="message"
                   id="Message"
+                  name="message"
                   required
+                  value={formData.message}
                   onChange={handleChange}
                   className="w-full h-[200px] pt-2 resize-none pl-4 mb-4 text-[12px] outline-none rounded-md"
                 ></textarea>
@@ -154,6 +128,7 @@ const Page = () => {
                   type="checkbox"
                   name="urgent"
                   id="urgent"
+                  checked={formData.urgent}
                   onChange={handleChange}
                 />
                 <label
@@ -163,9 +138,24 @@ const Page = () => {
                   Mark as urgent
                 </label>
               </div>
-              <button className="bg-[#009688] p-2 mt-4 text-white rounded-sm">
-                Send message
+              <button
+                className="bg-[#009688] p-2 mt-4 text-white rounded-sm"
+                disabled={loading}
+              >
+                {loading ? "Sending..." : "Send message"}
               </button>
+
+              {status && (
+                <p
+                  className={`mt-3 text-sm ${
+                    status.type === "success"
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {status.message}
+                </p>
+              )}
             </form>
           </div>
         </div>
