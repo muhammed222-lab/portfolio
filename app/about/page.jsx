@@ -1,257 +1,181 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Footer from "../components/footer";
 import Image from "next/image";
 import "../ui/globals.css";
-import { useEffect, useState } from "react";
 
 const About = () => {
   const [isAboutPage, setIsAboutPage] = useState(false);
+
   useEffect(() => {
     if (window.location.href.includes("/about")) {
       setIsAboutPage(true);
     }
   }, []);
+
   return (
-    <div className=" bg-white -mt-15 pt-[30px] p-7">
+    <div className="bg-white -mt-15 pt-[30px] p-7">
       <div className="aboutContainer">
-        <div className="me_section mt-[6rem] flex p-8 justify-evenly laptop:flex-row tablet:flex-col">
-          <div>
+        <div className="me_section mt-[6rem] flex flex-col lg:flex-row p-8 justify-evenly">
+          <div className="flex flex-col items-center lg:items-start">
             <Image
               src={"/favicon.ico"}
               alt="Muhammed"
-              width={"100"}
-              height={"100"}
-              className="mb-18 border w-[70px] rounded-full bg-gray-300 sticky"
+              width={100}
+              height={100}
+              className="mb-6 border w-[70px] rounded-full bg-gray-300"
             />
-            <h2 className="aboutMe laptop:text-3xl tablet:text-[15px] font-bold mt-[20px] mb-[10px] desktop:w-[500px] laptop:w-[400px] tablet:w-[250px]">
-              {/* {isAboutPage && <div>You are on about page</div>} */}
-              I'm Muhammed Olayemi. I lives in the Lagos state where i code and
-              work my best
+            <h2 className="aboutMe text-3xl font-bold mt-4 mb-2 text-center lg:text-left">
+              I'm Muhammed Olayemi. I live in Lagos state where I code and work
+              my best.
             </h2>
-
-            <p className="aboutMeText mt-5 desktop:text-sm desktop:w-[600px] laptop:w-[400px] tablet:w-[300px] tablet:text-[11px]">
+            <p className="aboutMeText mt-5 text-sm text-center lg:text-left">
               I'm Muhammed Olayemi, a full stack website developer, software
-              developer and entrepreneur based in Lagos Nigeria.
+              developer and entrepreneur based in Lagos, Nigeria.
               <br />
-              Im the founder and the CEO of{" "}
+              I'm the founder and the CEO of{" "}
               <a href="#" className="text-[#009688]">
                 Smart Office
               </a>
-              , where we develope software to solve organization difficulties.
+              , where we develop software to solve organizational difficulties.
             </p>
 
-            <div className="stack_section">
-              <h1 className="text-[15px] text-gray-700 mb-4 font-bold">
-                Stack & skills
+            <div className="stack_section mt-6">
+              <h1 className="text-lg text-gray-700 mb-4 font-bold">
+                Stack & Skills
               </h1>
-              <div className="stack-list flex w-[400px]">
-                <Image
-                  src={"/javascript.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="javascript"
-                  alt="javascript"
-                />
-                <Image
-                  src={"/python.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="python"
-                  alt="python"
-                />
-
-                <Image
-                  src={"/css.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="css"
-                  alt="css"
-                />
-                <Image
-                  src={"/html.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="html"
-                  alt="html"
-                />
-                <Image
-                  src={"/reactjs.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="react js & native"
-                  alt="react"
-                />
-
-                <Image
-                  src={"/figma.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="figma"
-                  alt="figma"
-                />
-                <Image
-                  src={"/git.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="git"
-                  alt="git"
-                />
-                <Image
-                  src={"/mongodb.png"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="mongodb"
-                  alt="mongodb"
-                />
-                <Image
-                  src={"/nextjs.svg"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="Next js"
-                  alt="next js"
-                />
-                <Image
-                  src={"/nodejs.svg"}
-                  width={50}
-                  height={50}
-                  className="rounded-sm laptop:w-[50px] tablet:w-[30px] laptop:h-[50px] tablet:h-[30px]"
-                  title="Node js"
-                  alt="node js"
-                />
+              <div className="stack-list flex flex-wrap gap-4">
+                {[
+                  "javascript",
+                  "python",
+                  "css",
+                  "html",
+                  "reactjs",
+                  "figma",
+                  "git",
+                  "mongodb",
+                  "nextjs",
+                  "nodejs",
+                ].map((tech) => (
+                  <Image
+                    key={tech}
+                    src={`/${tech}.png`}
+                    width={50}
+                    height={50}
+                    className="rounded-sm w-[50px] h-[50px]"
+                    title={tech}
+                    alt={tech}
+                  />
+                ))}
               </div>
             </div>
-            <div className="certification">
-              <h1 className="text-[15px] text-gray-700 mb-4 font-bold pt-4">
+
+            <div className="certification mt-6">
+              <h1 className="text-lg text-gray-700 mb-4 font-bold">
                 Certification
               </h1>
-              <div className="stack-list flex laptop:w-[500px] tablet:w-[300px] flex-wrap gap-[10px]">
-                <div className="border border-s-gray-200 p-2 w-[200px]">
-                  <Image
-                    src={"/php_certificate.jpg"}
-                    width={200}
-                    height={150}
-                    className="rounded-sm"
-                    alt="php certificate"
-                  />
-                  <span className="text-[13px] text-gray-500">
-                    PHP certificate
-                  </span>
-                  <p className="text-[11px] text-gray-400">
-                    I obtain this certificate on SOLOLEARN
-                  </p>
-                </div>
-                <div className="border border-s-gray-200 p-2 w-[200px]">
-                  <Image
-                    src={"/html_certificate.jpg"}
-                    width={200}
-                    height={150}
-                    className="rounded-sm"
-                    alt="html certificate"
-                  />
-                  <span className="text-[13px] text-gray-500">
-                    HTML certificate
-                  </span>
-                  <p className="text-[11px] text-gray-400">
-                    I obtain this certificate on SOLOLEARN
-                  </p>
-                </div>
-                <div className="border border-s-gray-200 p-2 w-[200px]">
-                  <Image
-                    src={"/java_certificate.png"}
-                    width={200}
-                    height={150}
-                    className="rounded-sm"
-                    alt="java certificate"
-                  />
-                  <span className="text-[13px] text-gray-500">
-                    JAVA certificate
-                  </span>
-                  <p className="text-[11px] text-gray-400">
-                    I obtain this certificate on learn Tech Platform
-                  </p>
-                </div>
+              <div className="stack-list flex flex-wrap gap-4">
+                {[
+                  {
+                    src: "/php_certificate.jpg",
+                    title: "PHP certificate",
+                    description: "I obtained this certificate on SOLOLEARN",
+                  },
+                  {
+                    src: "/html_certificate.jpg",
+                    title: "HTML certificate",
+                    description: "I obtained this certificate on SOLOLEARN",
+                  },
+                  {
+                    src: "/java_certificate.png",
+                    title: "JAVA certificate",
+                    description:
+                      "I obtained this certificate on Learn Tech Platform",
+                  },
+                ].map((cert, index) => (
+                  <div
+                    key={index}
+                    className="border border-gray-200 p-2 w-[200px]"
+                  >
+                    <Image
+                      src={cert.src}
+                      width={200}
+                      height={150}
+                      className="rounded-sm"
+                      alt={cert.title}
+                    />
+                    <span className="text-[13px] text-gray-500">
+                      {cert.title}
+                    </span>
+                    <p className="text-[11px] text-gray-400">
+                      {cert.description}
+                    </p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-          <div>
+
+          <div className="flex flex-col items-center lg:items-start">
             <Image
               src={"/muhammed.jpg"}
               width={300}
               height={300}
-              className="rounded-lg rotate-3 "
-              alt="muhammed"
+              className="rounded-lg rotate-3"
+              alt="Muhammed"
             />
-            <div className="social_media mt-[20px] text-sm flex-col">
-              <Link
-                href={"#"}
-                className="mt-[10px] flex gap-4 mr-1 rounded-sm text-[black] text-md p-[5px]">
-                <Image
-                  src={"/social-facebook.png"}
-                  alt="facebook"
-                  width={20}
-                  height={20}
-                  className="opacity-[.5] hover:opacity-[1] transition"
-                />
-                <p>Follow on Facebook</p>
-              </Link>
-
-              <Link
-                href={"#"}
-                className="mt-[10px] flex gap-4 mr-1 rounded-sm text-[black] text-sm p-[5px]">
-                <Image
-                  src={"/social-github.png"}
-                  alt="github"
-                  width={20}
-                  height={20}
-                  className="opacity-[.5] hover:opacity-[1] transition"
-                />
-                <p>Follow on Github</p>
-              </Link>
-
-              <Link
-                href={"#"}
-                className="mt-[10px] flex gap-4 mr-1 rounded-sm text-[black] text-sm p-[5px]">
-                <Image
-                  src={"/social-linkedin.png"}
-                  alt="linkedin"
-                  width={20}
-                  height={20}
-                  className="opacity-[.5] hover:opacity-[1] transition"
-                />
-                <p>Follow on linkedin</p>
-              </Link>
-              <Link
-                href={"#"}
-                className="mt-[10px] flex gap-4 mr-1 rounded-sm text-[black] text-sm p-[5px]">
-                <Image
-                  src={"/social-twitter.png"}
-                  alt="linkedin"
-                  width={20}
-                  height={20}
-                  className="opacity-[.5] hover:opacity-[1] transition"
-                />
-                <p>Follow on Twitter</p>
-              </Link>
+            <div className="social_media mt-6 text-sm flex flex-col items-center lg:items-start">
+              {[
+                {
+                  href: "#",
+                  src: "/social-facebook.png",
+                  alt: "facebook",
+                  text: "Follow on Facebook",
+                },
+                {
+                  href: "#",
+                  src: "/social-github.png",
+                  alt: "github",
+                  text: "Follow on Github",
+                },
+                {
+                  href: "#",
+                  src: "/social-linkedin.png",
+                  alt: "linkedin",
+                  text: "Follow on LinkedIn",
+                },
+                {
+                  href: "#",
+                  src: "/social-twitter.png",
+                  alt: "twitter",
+                  text: "Follow on Twitter",
+                },
+              ].map((social, index) => (
+                <Link
+                  key={index}
+                  href={social.href}
+                  className="mt-2 flex gap-4 items-center text-black text-md p-2 rounded-sm hover:bg-gray-100 transition"
+                >
+                  <Image
+                    src={social.src}
+                    alt={social.alt}
+                    width={20}
+                    height={20}
+                    className="opacity-50 hover:opacity-100 transition"
+                  />
+                  <p>{social.text}</p>
+                </Link>
+              ))}
             </div>
-            <div className="email_add pt-4 border-t-2 border-solid border-gray-300 mt-5">
-              <div className="title flex align-center gap-2 items-center">
+            <div className="email_add pt-4 border-t-2 border-solid border-gray-300 mt-5 w-full text-center lg:text-left">
+              <div className="title flex items-center gap-2 justify-center lg:justify-start">
                 <Image
                   src={"/email.png"}
                   width={30}
                   height={25}
                   alt="email"
-                  className="opacity-[.7]"
+                  className="opacity-70"
                 />
                 <Link href={"mailto:olayemimuhammed2020@gmail.com"}>
                   <span className="text-[12px]">
@@ -259,15 +183,15 @@ const About = () => {
                   </span>
                 </Link>
               </div>
-              <div className="title flex align-center gap-2 items-center">
+              <div className="title flex items-center gap-2 justify-center lg:justify-start mt-2">
                 <Image
                   src={"/phone.png"}
                   width={30}
                   height={25}
-                  className="opacity-[.7]"
+                  className="opacity-70"
                   alt="phone"
                 />
-                <Link href={"phone:09154996570"}>
+                <Link href={"tel:09154996570"}>
                   <span className="text-[12px]">09154996570 | 08167321855</span>
                 </Link>
               </div>

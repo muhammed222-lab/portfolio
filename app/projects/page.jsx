@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import Link from "next/link";
 import Footer from "../components/footer";
 import Image from "next/image";
 import Project from "../components/project";
@@ -14,16 +13,18 @@ const Page = () => {
     "The mending",
     "Pay me",
     "Netrc",
-    "Opay",
+    "Opay Cloned (Just for learning purpose)",
+    "Moshood fashion Home",
   ];
   let projectText = [
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
-    "A tech startup that aim to solve a most common organization difficulties.",
+    "An innovative tech startup dedicated to streamlining organizational processes and improving efficiency through smart technology solutions.",
+    "A Student Industrial Work Experience Scheme (SIWES) management system for AAPOLY, designed to help students track their industrial training progress, submit reports, and communicate with supervisors.",
+    "A digital health and wellness platform that provides personalized nutrition plans, supplements, and expert guidance for a healthier lifestyle.",
+    "A non-profit organization leveraging technology to provide humanitarian aid, educational resources, and skill development for underprivileged communities.",
+    "A fast and secure online payment gateway offering seamless transactions, low fees, and multiple integration options for businesses and individuals.",
+    "A cloud-based networking and data management platform designed to enhance connectivity, security, and collaboration across different industries.",
+    "A financial technology company offering mobile banking, digital wallets, and cashless transactions for businesses and individuals across various regions.",
+    "An e-commerce platform for fashion enthusiasts to discover, shop, and share trendy clothing, accessories, and lifestyle products.",
   ];
   let projectIcon = [
     "/smartc-filled-icon.png",
@@ -32,16 +33,17 @@ const Page = () => {
     "/mending.png",
     "/payme.png",
     "/netrc.png",
-    "/opay.png",
+    "/mfh.png",
   ];
   let projectUrl = [
-    "smartc.tech",
-    "aapoly.edu.ng",
-    "Nutrelife.com",
+    "https://github.com/muhammed222-lab/smartc-office",
+    "https://github.com/muhammed222-lab/siwes",
+    "https://github.com/muhammed222-lab/nutrelife",
     "themendinghands.edu.ng",
-    "payme.x",
-    "netrc.com",
-    "opay.com",
+    "https://github.com/muhammed222-lab/payme",
+    "https://github.com/muhammed222-lab/netrc",
+    "https://github.com/muhammed222-lab/opay-clone",
+    "https://www.moshoodfashion.store",
   ];
 
   return (
