@@ -33,6 +33,7 @@ const Page = () => {
     "/mending.png",
     "/payme.png",
     "/netrc.png",
+    "/opay.png",
     "/mfh.png",
   ];
   let projectUrl = [

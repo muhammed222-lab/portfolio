@@ -6,13 +6,14 @@ const projectsList = () => {
   return (
     <div className="mt-7">
       <h2 className="mb-5 pl-2 border-l-2 border-s-gray-200 text-gray-900">
-        Real projects
+        Other projects
       </h2>
       <div className="flex flex-wrap gap-3">
         {projects.map((project, index) => (
           <div
             key={index}
-            className="project_list p-5 shadow-sm w-60 border-gray-50 border-[1.2px] rounded-md hover:bg-[#fcfcfc]">
+            className="project_list p-5 shadow-sm w-60 border-gray-50 border-[1.2px] rounded-md hover:bg-[#fcfcfc]"
+          >
             <Image
               src={project.image}
               width={200}
@@ -31,7 +32,8 @@ const projectsList = () => {
                 {project.tags.map((tag, index) => (
                   <p
                     className="text-[12px] text-[#328379] mb-3 inline-block"
-                    key={index}>
+                    key={index}
+                  >
                     #{tag.name}
                   </p>
                 ))}
@@ -40,7 +42,8 @@ const projectsList = () => {
             <Link
               href={"https://" + project.name}
               target="_blank"
-              className="text-[12px] text-[#009688] pt-8 lowercase tracking-[0px]">
+              className="text-[12px] text-[#009688] pt-8 lowercase tracking-[0px]"
+            >
               {project.source_code_link} {project.name}→
             </Link>
           </div>
