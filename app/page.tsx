@@ -28,7 +28,7 @@ export default function Home() {
   ];
 
   let workPlace = [
-    "SMΛRTC",
+    "SMΛRTC (Under Smart Office)",
     "Top solid composite limited",
     "SEGTOP edu consult",
     "MAN 2 TECH",
