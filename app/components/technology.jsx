@@ -40,21 +40,6 @@ const Technology = () => {
           </div>
         ))}
       </div>
-
-      {selectedTech && (
-        <div className="modal fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-5 rounded-lg border">
-            <h2 className="text-xl font-bold mb-4">{selectedTech.name}</h2>
-            <p>Proficiency: {selectedTech.proficiency}%</p>
-            <button
-              className="mt-4 px-4 py-2 bg-blue-500 text-white rounded"
-              onClick={handleCloseModal}
-            >
-              Close
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
